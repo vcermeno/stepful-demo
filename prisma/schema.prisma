@@ -1,0 +1,26 @@
+// schema.prisma
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Slot {
+  id          String    @id @default(cuid())
+  studentId   String?
+  studentName String?
+  coachId     String
+  coachName   String
+  isBooked    Boolean?
+  notes       Json?
+  satisfactionScore Int?
+  startTime   DateTime
+  endTime     DateTime
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  deletedAt   DateTime? @map("deleted_at")
+}
